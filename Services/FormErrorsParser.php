@@ -106,7 +106,7 @@ class FormErrorsParser
 				$translation = $parent->getConfig()->getOption('translation_domain');
 				$parent = $parent->getParent();
 				if (empty($parent) && empty($translation))
-					$tranlsation = 'messages';
+					$translation = 'messages';
 			}
 		}
 		return $translation = $translation === 'messages' ? null : $translation ;  // Allow the Symfony Default setting to be used by returning null.
