@@ -69,7 +69,11 @@ class FormErrorsParser
             if (empty($label)) {
                 $label = ucfirst(trim(strtolower(preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $name))));
             }
-            $results[] = array('name' => $name, 'label' => $label, 'errors' => $errors);
+            $errorMessages = array();
+            foreach ($errors as $error) {
+                $errorMessages[] = $error;
+            }
+            $results[] = array('name' => $name, 'label' => $label, 'errors' => $errorMessages);
         }
         
         /*
