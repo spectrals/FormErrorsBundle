@@ -126,15 +126,15 @@ class FormErrorsParser
     private function getTranslationDomain(FormInterface $form)
     {
         $translation = $form->getConfig()->getOption('translation_domain');
-		if (empty($translation)) {
-			$parent = $form->getParent();
-			while (empty($translation)) {
-				$translation = $parent->getConfig()->getOption('translation_domain');
-				$parent = $parent->getParent();
-				if (empty($parent) && empty($translation))
-					$translation = 'messages';
-			}
-		}
+        $parent = $form->getParent();
+        if ($parent instanceof FormInterface && empty($translation)) {
+            while (empty($translation)) {
+                $translation = $parent->getConfig()->getOption('translation_domain');
+                $parent = $parent->getParent();
+                if (empty($parent) && empty($translation))
+                    $translation = 'messages';
+            }
+        }
 		return $translation = $translation === 'messages' ? null : $translation ;  // Allow the Symfony Default setting to be used by returning null.
 	}
 }
